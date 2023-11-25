@@ -47,7 +47,7 @@ const Registro = () => {
         })
         // navegar a login
 
-        navigate('/')
+        navigate('/zonaCliente/confirmarSesion')
       }
 
     } catch (error) {

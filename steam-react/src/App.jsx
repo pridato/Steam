@@ -7,6 +7,7 @@ import Registro from "./components/zonaCliente/Registro/Registro"
 import Login from "./components/zonaCliente/InicioSesion/Login"
 import Productos from "./components/zonaSteam/juegos/Productos"
 import Layout from './components/zonaSteam/layouts/Layout';
+import ConfirmarSesion from './components/zonaCliente/confirmarKey/confirmarSesion';
 
 const routerObjects = createBrowserRouter(
   [
@@ -18,7 +19,8 @@ const routerObjects = createBrowserRouter(
       ]
     },
     { path: '/zonaCliente/registro', element: <Registro /> },
-    { path: '/zonaCliente/login', element: <Login /> }
+    { path: '/zonaCliente/login', element: <Login /> },
+    { path: '/zonaCliente/confirmarSesion', element: <ConfirmarSesion />}
 
   ]
 )
