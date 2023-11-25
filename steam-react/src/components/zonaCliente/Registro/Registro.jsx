@@ -16,6 +16,7 @@ import {
 import PasswordInput from './PasswordInput'
 import { useClienteLogged } from '../../../hooks/useClienteLogged'
 import { useNavigate } from 'react-router-dom'
+import clienteRESTService from '../../../servicios/restCliente'
 
 const Registro = () => {
 
@@ -28,24 +29,37 @@ const Registro = () => {
     setclienteLogged({ ...clienteLogged, [e.target.name]: e.target.value })
   }
 
-  const handleSubmitForm = (e) => {
+  async function handleSubmitForm(e) {
+
     e.preventDefault()
-
-    console.log(clienteLogged)
-    // guardar en localstorage
     localStorage.setItem('cliente', JSON.stringify(clienteLogged))
-    // mostrar toast y al cerrar navegar a login
-    toast({
-      title: "Cuenta creada.",
-      description: "Ya puedes iniciar sesión.",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    })
-      // navegar a login
-      navigate('/zona-cliente/login')
 
-    
+    try {
+      const respuesta = await clienteRESTService.RegistroCliente(clienteLogged)
+
+      if (respuesta.status !== 200) {
+        toast({
+          title: "Cuenta creada.",
+          description: "Ya puedes iniciar sesión.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        })
+        // navegar a login
+
+        navigate('/')
+      }
+
+    } catch (error) {
+      toast({
+        title: "Error.",
+        description: "No se pudo crear la cuenta.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+
   }
 
   return (
